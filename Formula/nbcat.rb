@@ -8,7 +8,6 @@ class Nbcat < Formula
   desc "Preview jupyter notebooks directly in your terminal think of it as cat, but for"
   homepage "https://github.com/akopdev/nbcat"
   url "https://github.com/akopdev/nbcat/archive/refs/tags/v0.10.0.tar.gz"
-  version "0.10.0"
   sha256 "9f9d6458cf64e61cc3f824e968e999fb91998bfe6de8bc56f2e1f90796cf085d"
   license "MIT"
 
