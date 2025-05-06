@@ -15,10 +15,10 @@ class Nbcat < Formula
   depends_on "python@3.13"
 
   def install
-    bin.install "nbcat"
+    virtualenv_install_with_resources
   end
 
   test do
-    assert_match(version.to_s, shell_output("#{bin}/nbcat --version"))
+    assert_match version.to_s, shell_output("#{bin}/nbcat --version")
   end
 end
