@@ -1,0 +1,24 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  tap:
+    runs-on: macos-latest
+    steps:
+      - uses: Homebrew/actions/setup-homebrew@master
+      - run: brew tap akopdev/formulas
+  install:
+    runs-on: macos-latest
+    needs: tap
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Homebrew/actions/setup-homebrew@master
+      - run: brew install --formula $(pwd)/Formula/*.rb
+  audit:
+    runs-on: macos-latest
+    needs: install
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Homebrew/actions/setup-homebrew@master
+      - run: brew audit --tap akopdev/formulas
