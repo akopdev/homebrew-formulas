@@ -14,7 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: Homebrew/actions/setup-homebrew@master
-      - run: brew install --formula $(pwd)/Formula/*.rb
+      - run: |
+          brew developer on
+          for formula in Formula/*.rb; do
+            echo "::group::Installing and testing $(basename "$formula")"
+            brew install --build-from-source "$formula"
+            brew test --verbose "$formula" || exit 1
+            echo "::endgroup::"
+          done
   audit:
     runs-on: macos-latest
     needs: install
