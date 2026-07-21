@@ -17,9 +17,10 @@ jobs:
       - run: |
           brew developer on
           for formula in Formula/*.rb; do
-            echo "::group::Installing and testing $(basename "$formula")"
-            brew install --build-from-source "$formula"
-            brew test --verbose "$formula" || exit 1
+            name="akopdev/formulas/$(basename "$formula" .rb)"
+            echo "::group::Installing and testing $name"
+            brew install --build-from-source "$name"
+            brew test --verbose "$name" || exit 1
             echo "::endgroup::"
           done
   audit:
